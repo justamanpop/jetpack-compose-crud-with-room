@@ -10,9 +10,13 @@ import kotlinx.coroutines.flow.asStateFlow
 data class ListPeopleScreenState(
     val people: Flow<List<Person>>
 )
-class ListPeopleScreenViewModel(personDao: PersonDao): ViewModel() {
+class ListPeopleScreenViewModel(private val personDao: PersonDao): ViewModel() {
     private val _uiState = MutableStateFlow(ListPeopleScreenState(
         people = personDao.getAll()
     ))
     val uiState = _uiState.asStateFlow()
+
+    suspend fun deletePerson(id: Int) {
+        personDao.deletePersonById(id)
+    }
 }

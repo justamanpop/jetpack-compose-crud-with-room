@@ -1,6 +1,7 @@
 package com.example.cruddemo.models
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
@@ -21,6 +22,9 @@ interface PersonDao {
 
     @Insert
     suspend fun addPerson(person: Person)
+
+    @Query("DELETE FROM person WHERE id = :id")
+    suspend fun deletePersonById(id: Int)
 }
 
 object Hardcoded {
