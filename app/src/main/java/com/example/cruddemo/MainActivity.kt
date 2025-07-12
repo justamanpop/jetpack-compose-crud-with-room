@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import androidx.room.Room
 import com.example.cruddemo.screens.AddPersonScreen.AddPersonScreen
 import com.example.cruddemo.screens.AddPersonScreen.AddPersonScreenViewModel
@@ -14,6 +15,9 @@ import com.example.cruddemo.screens.AddPersonScreenRoute
 import com.example.cruddemo.screens.ListPeopleScreen.ListPeopleScreen
 import com.example.cruddemo.screens.ListPeopleScreen.ListPeopleScreenViewModel
 import com.example.cruddemo.screens.ListPeopleScreenRoute
+import com.example.cruddemo.screens.UpdatePersonScreen.UpdatePersonScreen
+import com.example.cruddemo.screens.UpdatePersonScreen.UpdatePersonScreenViewModel
+import com.example.cruddemo.screens.UpdatePersonScreenRoute
 import com.example.cruddemo.ui.theme.CrudDemoTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,6 +41,13 @@ class MainActivity : ComponentActivity() {
                     composable<AddPersonScreenRoute> {
                         val addPersonScreenViewModel = AddPersonScreenViewModel(navController, db.personDao())
                         AddPersonScreen(addPersonScreenViewModel)
+                    }
+
+                    composable<UpdatePersonScreenRoute> {
+                        backStackEntry ->
+                        val updatePersonRoute: UpdatePersonScreenRoute = backStackEntry.toRoute()
+                        val updatePersonScreenViewModel = UpdatePersonScreenViewModel(navController, db.personDao(), updatePersonRoute.personId)
+                        UpdatePersonScreen(updatePersonScreenViewModel)
                     }
                 }
             }

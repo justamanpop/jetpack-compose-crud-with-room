@@ -3,7 +3,6 @@ package com.example.cruddemo.screens.AddPersonScreen
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.example.cruddemo.models.Hardcoded
 import com.example.cruddemo.models.Person
 import com.example.cruddemo.models.PersonDao
 import kotlinx.coroutines.flow.MutableStateFlow
