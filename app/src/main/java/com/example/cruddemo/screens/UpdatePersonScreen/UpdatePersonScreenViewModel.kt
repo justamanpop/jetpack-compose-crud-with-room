@@ -34,7 +34,6 @@ class UpdatePersonScreenViewModel(
             val person = withContext(Dispatchers.IO) {
                 personDao.getPersonById(personId)
             }
-//            delay(5000)
             _uiState.update { _ ->
                 UpdatePersonScreenState(
                     name = person.name,
