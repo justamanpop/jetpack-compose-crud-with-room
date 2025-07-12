@@ -63,8 +63,9 @@ class UpdatePersonScreenViewModel(
         if (_uiState.value.name == "" || _uiState.value.age == "") {
             return
         }
-        personDao.addPerson(
+        personDao.updatePerson(
             Person(
+                id = personId,
                 name = _uiState.value.name,
                 age = _uiState.value.age.toInt(),
             )

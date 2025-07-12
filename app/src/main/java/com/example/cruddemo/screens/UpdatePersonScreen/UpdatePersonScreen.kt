@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -34,6 +36,7 @@ fun UpdatePersonScreen(viewModel: UpdatePersonScreenViewModel) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val focusRequester = remember { FocusRequester() }
     val coroutineScope = rememberCoroutineScope()
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
@@ -63,6 +66,7 @@ fun UpdatePersonScreen(viewModel: UpdatePersonScreenViewModel) {
 
             Button(
                 onClick = {
+                    focusManager.clearFocus()
                     coroutineScope.launch {
                         viewModel.submitPerson()
                     }
@@ -75,7 +79,6 @@ fun UpdatePersonScreen(viewModel: UpdatePersonScreenViewModel) {
             ) {
                 Row {
                     Text("Update")
-                    Icon(Icons.Default.Add, contentDescription = "add")
                 }
             }
         }
