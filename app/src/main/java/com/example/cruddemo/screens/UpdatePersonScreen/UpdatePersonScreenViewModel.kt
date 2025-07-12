@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import com.example.cruddemo.models.Person
 import com.example.cruddemo.models.PersonDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +18,7 @@ import kotlinx.coroutines.withContext
 data class UpdatePersonScreenState(
     val name: String = "",
     val age: String = "",
+    val isFormEnabled: Boolean = false
 )
 
 class UpdatePersonScreenViewModel(
@@ -32,10 +34,12 @@ class UpdatePersonScreenViewModel(
             val person = withContext(Dispatchers.IO) {
                 personDao.getPersonById(personId)
             }
+//            delay(5000)
             _uiState.update { _ ->
                 UpdatePersonScreenState(
                     name = person.name,
                     age = person.age.toString(),
+                    isFormEnabled = true,
                 )
             }
         }

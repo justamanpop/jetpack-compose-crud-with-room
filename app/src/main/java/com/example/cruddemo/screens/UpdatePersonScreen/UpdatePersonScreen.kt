@@ -54,7 +54,8 @@ fun UpdatePersonScreen(viewModel: UpdatePersonScreenViewModel) {
                 keyboardOptions = KeyboardOptions.Default.copy(capitalization = KeyboardCapitalization.Words),
                 onValueChange = { newName ->
                     viewModel.updateName(newName)
-                }, modifier = Modifier.focusRequester(focusRequester)
+                }, enabled = state.isFormEnabled,
+                modifier = Modifier.focusRequester(focusRequester)
             )
             TextField(
                 value = state.age,
@@ -62,7 +63,7 @@ fun UpdatePersonScreen(viewModel: UpdatePersonScreenViewModel) {
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 onValueChange = { newAge ->
                     viewModel.updateAge(newAge)
-                })
+                }, enabled = state.isFormEnabled)
 
             Button(
                 onClick = {
